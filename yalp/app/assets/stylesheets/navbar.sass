@@ -1,0 +1,33 @@
+#main_nav
+  .navbar-brand,
+  .nav-item,
+  .nav-link
+    color: $primary-white
+    &:hover
+      color: $secondary-gray
+  form
+    min-width: 400px
+    input
+      border-color: $primary-white
+  .dropdown-toggle-split
+    padding-left: 0
+  .btn-outline-secondary
+    color: $primary-white
+    border-color: $primary-white
+    &:hover
+      background-color: $secondary-red
+
+@media (max-width: $min-laptop)
+  #main_nav
+    form
+      margin: 5px 0
+      width: 50%
+      min-width: 300px
+    .navbar-signin
+      .btn
+        margin: 5px
+    .dropdown-toggle-split
+      padding-left: 5px
+    li.nav-item
+      .dropdown-menu
+        position: absolute 

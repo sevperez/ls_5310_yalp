@@ -1,0 +1,59 @@
+%nav#main_nav.navbar.navbar-expand-lg.navbar-light.bg-primary-red.px-3.border.border-top-0.border-left-0.border-right-0.sticky-top
+  %a(href="#" class="navbar-brand") Yalp
+  %button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_nav" aria-controls="navbar_nav" aria-expanded="false" aria-label="Toggle navigation")
+    %span.navbar-toggler-icon
+  .collapse.navbar-collapse(id="navbar_nav")
+    %ul.navbar-nav.mr-auto
+      %li.nav-item.dropdown
+        .btn-group
+          = link_to "Businesses", "#", class: "btn btn-link nav-link"
+          %a(href="#" class="btn btn-link nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+            %span.sr-only Toggle Dropdown
+          .dropdown-menu
+            = link_to "#", class: "dropdown-item" do
+              %small
+                %i.fa.fa-plus.mr-1
+                Add Business
+            .dropdown-divider
+            - ["Food", "Shopping", "Lodging", "Services", "Activities"].sort.each do |category|
+              = link_to "#", class: "dropdown-item" do
+                %small= category
+      %li.nav-item.dropdown
+        .btn-group
+          = link_to "Reviews", "#", class: "btn btn-link nav-link"
+          %a(href="#" class="btn btn-link nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+            %span.sr-only Toggle Dropdown
+          .dropdown-menu
+            - ["Food", "Shopping", "Lodging", "Services", "Activities"].sort.each do |category|
+              = link_to "#", class: "dropdown-item" do
+                %small= category
+    %form.form-inline.mx-lg-3
+      .input-group.w-100
+        %input(type="text" class="form-control" placeholder="Search" aria-label="Search")
+        .input-group-append
+          %button.btn.btn-outline-secondary
+            %i.fa.fa-search
+    .navbar-signin
+      - unless true
+        = link_to "", class: "btn white-outline-btn mx-lg-1" do
+          %i.fa.fa-sign-in
+          Sign In
+        = link_to "", class: "btn white-outline-btn mx-lg-1" do
+          %i.fa.fa-user-plus
+          Register
+      - else
+        .btn-group
+          %button(type="button" class="btn white-outline-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+            %small
+              %i.fa.fa-user-circle-o.mr-2
+              Popeye Perez
+          .dropdown-menu
+            %a(href="#" class="dropdown-item")
+              %small
+                %i.fa.fa-user.pr-2
+                Profile
+            .dropdown-divider
+            = link_to "", class: "dropdown-item" do
+              %small
+                %i.fa.fa-sign-out.pr-2
+                Sign Out
