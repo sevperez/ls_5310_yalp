@@ -13,11 +13,9 @@
   .star_rating
     select
       width: 50px
-
-#review-list
-  list-style: none
-  padding: 0
-  li
+      
+.business-list
+  .list-group-item
     div:first-child
       width: 200px
       margin: 0
@@ -25,7 +23,6 @@
       width: -webkit-calc(100% - 205px)
       width:    -moz-calc(100% - 205px)
       width:         calc(100% - 205px)
-  
 
 @media (max-width: $min-tablet)
   .business-description
@@ -34,10 +31,10 @@
       margin-bottom: 15px
     div:last-child
       width: 100%
-  #review-list
-    li
+  .business-list
+    .list-group-item
       div:first-child
         width: 100%
-        margin-bottom: 10px
+        margin-bottom: 15px
       div:last-child
         width: 100%

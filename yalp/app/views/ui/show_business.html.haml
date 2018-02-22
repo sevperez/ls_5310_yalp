@@ -9,10 +9,12 @@
 
 %section.col-10.mx-auto
   %section.business-description.mb-3.border.rounded.bg-light.p-3
+    %span.d-block.badge.category-badge.mb-2
+      %a.badge-link(href="#") Food and Drink
     %p.lead.mb-1
       %i.fa.fa-building.mr-2(area-hidden="true")
       Bob's Burgers
-    %p.lead.mb-1.pb-1.border.border-left-0.border-right-0.border-top-0
+    %p.lead.mb-1.pb-2.border.border-left-0.border-right-0.border-top-0
       %i.fa.fa-star.mr-2.text-star-gold
       %i.fa.fa-star.mr-2.text-star-gold
       %i.fa.fa-star.mr-2.text-star-gold
@@ -50,11 +52,11 @@
           %textarea(class="form-control" id="importance_comment" rows="5")
         = submit_tag "Submit", class: "btn primary-btn"
         %button(type="reset" class="btn secondary-btn px-3") Reset
-      %ul#review-list
+      %ul.review-list
         %li.border.border-top-0.border-right-0.border-left-0.py-3
           .d-inline-block
-            %p.mb-0 Popeye Perez
-            %small 18 January 2017 at 18:57 PST
+            %a.mb-0.primary-link.d-block(href="#") Popeye Perez
+            %small.text-secondary 18 January 2018 at 18:57 PST
             %p.lead.mb-0
               %i.fa.fa-star.mr-2.text-star-gold
               %i.fa.fa-star.mr-2.text-star-gold
@@ -64,8 +66,8 @@
             %p One of the best burgers I have had in my life. Service was only "OK" though. And what is with these crazy kids!?
         %li.border.border-top-0.border-right-0.border-left-0.py-3
           .d-inline-block
-            %p.mb-0 Olive Oil
-            %small 1 January 2017 at 13:21 PST
+            %a.mb-0.primary-link.d-block(href="#") Olive Oil
+            %small.text-secondary 1 January 2018 at 13:21 PST
             %p.lead.mb-0
               %i.fa.fa-star.mr-2.text-star-gold
               %i.fa.fa-star.mr-2.text-star-gold
@@ -76,8 +78,8 @@
             %p OK, this is without question the best burger place in the state. You MUST come here. Don't wait. Come now.
         %li.border.border-top-0.border-right-0.border-left-0.py-3
           .d-inline-block
-            %p.mb-0 Thomas Paine
-            %small 7 December 2017 at 12:36 PST
+            %a.mb-0.primary-link.d-block(href="#") Thomas Paine
+            %small.text-secondary 7 December 2017 at 12:36 PST
             %p.lead.mb-0
               %i.fa.fa-star.mr-2.text-star-gold
           .d-inline-block.align-top

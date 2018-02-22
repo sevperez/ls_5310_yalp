@@ -9,12 +9,25 @@
   background-color: $primary-gray
 .bg-secondary-gray
   background-color: $secondary-gray
+.bg-primary-white
+  background-color: $primary-white
+  
+// Outlines
+.outline
+  border: 1px solid $secondary-gray
+  border-radius: 0.25rem
+.outline-primary-red
+  border-color: $primary-red
+.outline-secondary-red
+  border-color: $secondary-red
 
 // Text
 .text-primary-white
   color: $primary-white
 .text-star-gold
   color: $star-gold
+.font-pacifico
+  font-family: 'Pacifico', cursive
 
 // Buttons
 .white-outline-btn
@@ -36,7 +49,7 @@
   &:hover
     color: $primary-white
     background-color: $secondary-purple
-    
+
 // Links
 .primary-link
   color: $primary-red
@@ -44,7 +57,19 @@
   &:hover
     color: $secondary-red
     text-decoration: none
+.badge-link
+  color: $primary-white
+  text-decoration: none
+  &:hover
+    color: $secondary-gray
+    text-decoration: none
 
-// Widths
-.px-w-100
-  width: 100px
+// Badges
+.badge
+  width: 125px
+.category-badge
+  color: $primary-white
+  background-color: $primary-red
+  &:hover
+    background-color: $secondary-red
+    cursor: pointer
