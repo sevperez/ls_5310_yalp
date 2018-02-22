@@ -15,7 +15,7 @@
                 %i.fa.fa-plus.mr-1
                 Add Business
             .dropdown-divider
-            - ["Food", "Shopping", "Lodging", "Services", "Activities"].sort.each do |category|
+            - ["Food and Drink", "Shopping", "Lodging", "Services", "Activities"].sort.each do |category|
               = link_to "#", class: "dropdown-item" do
                 %small= category
       %li.nav-item.dropdown
@@ -24,7 +24,7 @@
           %a(href="#" class="btn btn-link nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
             %span.sr-only Toggle Dropdown
           .dropdown-menu
-            - ["Food", "Shopping", "Lodging", "Services", "Activities"].sort.each do |category|
+            - ["Food and Drink", "Shopping", "Lodging", "Services", "Activities"].sort.each do |category|
               = link_to "#", class: "dropdown-item" do
                 %small= category
     %form.form-inline.mx-lg-3
@@ -34,7 +34,7 @@
           %button.btn.btn-outline-secondary
             %i.fa.fa-search
     .navbar-signin
-      - unless true
+      - unless false
         = link_to "", class: "btn white-outline-btn mx-lg-1" do
           %i.fa.fa-sign-in
           Sign In

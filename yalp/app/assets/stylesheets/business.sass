@@ -1,0 +1,43 @@
+// Styles - business.sass
+
+.business-description
+  div:first-child
+    width: 250px
+    margin: 0
+  div:last-child
+    width: -webkit-calc(100% - 255px)
+    width:    -moz-calc(100% - 255px)
+    width:         calc(100% - 255px)
+
+#review-form
+  .star_rating
+    select
+      width: 50px
+
+#review-list
+  list-style: none
+  padding: 0
+  li
+    div:first-child
+      width: 200px
+      margin: 0
+    div:last-child
+      width: -webkit-calc(100% - 205px)
+      width:    -moz-calc(100% - 205px)
+      width:         calc(100% - 205px)
+  
+
+@media (max-width: $min-tablet)
+  .business-description
+    div:first-child
+      width: 100%
+      margin-bottom: 15px
+    div:last-child
+      width: 100%
+  #review-list
+    li
+      div:first-child
+        width: 100%
+        margin-bottom: 10px
+      div:last-child
+        width: 100%

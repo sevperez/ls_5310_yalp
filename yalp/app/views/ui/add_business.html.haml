@@ -1,0 +1,64 @@
+:javascript
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+    
+    $('.popover-dismiss').popover({
+      trigger: 'focus'
+    });
+  })
+
+%section.col-lg-9.col-md-10.mx-auto
+  %p.lead
+    %i.fa.fa-plus-circle.mr-2(area-hidden="true")
+    Add Business
+  %form.border.rounded.bg-light.p-3
+    .form-row
+      .form-group.col-12
+        %label(for="full_name") Business Name
+        %input(type="text" class="form-control" id="name" name="name" placeholder="Your Business")
+    .form-row
+      .form-group.col-12
+        %label(for="category") Category
+        %small.text-secondary
+          %a(class="popover-anchor text-secondary" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="What is this for?" data-content="The category type will determine where your business is displayed in our directory.")
+            %i.fa.fa-question-circle-o
+        = select_tag "category", options_for_select(["Activities", "Food and Drink", "Lodging", "Services", "Shopping"]), class: "form-control"
+    .form-row
+      .form-group.col-12
+        %label(for="address") Address
+        %input(type="text" class="form-control" id="address" name="address" placeholder="Your Address")
+    .form-row
+      .form-group.col-md-4
+        %label(for="city") City
+        %input(type="text" class="form-control" id="city" name="city" placeholder="Your City")
+      .form-group.col-md-4
+        %label(for="state") State
+        = select_tag "state", options_for_select(us_states), class: "form-control"
+      .form-group.col-md-4
+        %label(for="zip_code") Zip Code
+        %input(type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Your Zip Code")
+    .form-row
+      .form-group.col-md-6
+        %label(for="phone_number") Phone Number
+        %input(type="text" class="form-control" id="phone_number" name="phone_number" placeholder="555-555-5555")
+      .form-group.col-md-6
+        %label(for="website") Website
+        .input-group
+          .input-group-prepend
+            %span.input-group-text= "http://"
+          %input(type="text" class="form-control" id="website" name="website" placeholder="www.yourwebsite.com")
+    .form-row
+      .form-group.col-md-6
+        %label(for="open_time") Opening Time
+        %small.text-secondary (24 hr clock)
+        = select_hour 9, { field_name: "open_time" }, { class: "form-control" }
+      .form-group.col-md-6
+        %label(for="close_time") Closing Time
+        %small.text-secondary (24 hr clock)
+        = select_hour 17, { field_name: "close_time" }, { class: "form-control" }
+    .form-row
+      .form-group.col-12
+        %label(for="description") Description
+        %textarea(class="form-control" id="description" rows="5")
+    = submit_tag "Register", class: "btn primary-btn"
+    %button(type="reset" class="btn secondary-btn px-3") Reset
