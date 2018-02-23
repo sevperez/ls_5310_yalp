@@ -35,10 +35,10 @@
             %i.fa.fa-search
     .navbar-signin
       - unless logged_in?
-        = link_to "", class: "btn white-outline-btn mx-lg-1" do
+        = link_to sign_in_path, class: "btn white-outline-btn mx-lg-1" do
           %i.fa.fa-sign-in
           Sign In
-        = link_to "", class: "btn white-outline-btn mx-lg-1" do
+        = link_to register_path, class: "btn white-outline-btn mx-lg-1" do
           %i.fa.fa-user-plus
           Register
       - else
@@ -53,7 +53,7 @@
                 %i.fa.fa-user.pr-2
                 Profile
             .dropdown-divider
-            = link_to "", class: "dropdown-item" do
+            = link_to sign_out_path, class: "dropdown-item" do
               %small
                 %i.fa.fa-sign-out.pr-2
                 Sign Out

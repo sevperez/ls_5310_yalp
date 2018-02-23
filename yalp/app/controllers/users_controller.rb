@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     
     if @user.save
       session[:user_id] = @user.id
-      flash[:success] = "Login successful!"
+      flash[:success] = "User registration successful!"
       redirect_to root_path
     else
       flash[:danger] = "Hmm, looks like there was an error."
