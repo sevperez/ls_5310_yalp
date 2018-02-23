@@ -8,5 +8,7 @@ class User < ActiveRecord::Base
   
   has_secure_password validations: false
   
+  has_many :businesses
+  
   set_slug_key :full_name
 end

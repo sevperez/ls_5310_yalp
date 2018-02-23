@@ -1,3 +1,3 @@
 Fabricator(:category) do
-  name { Faker::Lorem.words(2).join(" ").titleize }
+  name { ["Food and Drink", "Shopping", "Lodging", "Services", "Activities"].sample }
 end

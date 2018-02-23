@@ -3,5 +3,7 @@ class Category < ActiveRecord::Base
   
   validates :name, presence: true
   
+  has_many :businesses
+  
   set_slug_key :name
 end
