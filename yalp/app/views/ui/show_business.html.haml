@@ -1,0 +1,86 @@
+:javascript
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+    
+    $('.popover-dismiss').popover({
+      trigger: 'focus'
+    });
+  })
+
+%section.col-10.mx-auto
+  %section.business-description.mb-3.border.rounded.bg-light.p-3
+    %span.d-block.badge.category-badge.mb-2
+      %a.badge-link(href="#") Food and Drink
+    %p.lead.mb-1
+      %i.fa.fa-building.mr-2(area-hidden="true")
+      Bob's Burgers
+    %p.lead.mb-1.pb-2.border.border-left-0.border-right-0.border-top-0
+      %i.fa.fa-star.mr-2.text-star-gold
+      %i.fa.fa-star.mr-2.text-star-gold
+      %i.fa.fa-star.mr-2.text-star-gold
+      %i.fa.fa-star.mr-2.text-star-gold
+      %i.fa.fa-star-half-o.mr-2.text-star-gold
+    .d-inline-block.my-2.align-top
+      %a.mb-1.primary-link(href="#") Website
+      %p.mb-0 1200 North Burger Lane
+      %p.mb-0 Burgertown, NJ 87345
+      %p.mb-0 555-555-5555
+      %small.mb-0.text-secondary 1000-2000 hrs
+    .d-inline-block.my-2.pl-md-3.pl-xs-0.align-top
+      %p Grilling up the best burgers in Burgertown since 1968. Family-owned establishment that puts the focus on the customer. Join us on Thursdays for half-off super burgers and two-for-one fries. Never greasy, always tasty. Bob's burgers.
+  %section.add-review
+    .col-12
+      .clearfix.border.border-top-0.border-left-0.border-right-0
+        %p.lead.float-left
+          Reviews
+        %a(data-toggle="collapse" href="#review-form" role="button" aria-expanded="false" aria-controls="review_form" id="review_open_btn" class="primary-link float-right")
+          %p.lead
+            %i.fa.fa-plus-circle.mr-2(aria-hidden="true")
+            Add a Review
+    .col-12
+      %form#review-form.collapse.border.rounded.p-3.my-4.bg-light
+        .form-group.star_rating
+          %label.d-inline-block.mr-2(for="stars")
+            %i.fa.fa-star.mr-2
+            Stars
+          = select_tag "stars", options_for_select((1..5).to_a), class: "form-control d-inline-block"
+        .form-group
+          %label(for="content") Content
+          %small.text-secondary
+            %a(class="popover-anchor text-secondary" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="What is this for?" data-content="What did you think of this business? What should other users know before they go to this business?")
+              %i.fa.fa-question-circle-o
+          %textarea(class="form-control" id="importance_comment" rows="5")
+        = submit_tag "Submit", class: "btn primary-btn"
+        %button(type="reset" class="btn secondary-btn px-3") Reset
+      %ul.review-list
+        %li.border.border-top-0.border-right-0.border-left-0.py-3
+          .d-inline-block
+            %a.mb-0.primary-link.d-block(href="#") Popeye Perez
+            %small.text-secondary 18 January 2018 at 18:57 PST
+            %p.lead.mb-0
+              %i.fa.fa-star.mr-2.text-star-gold
+              %i.fa.fa-star.mr-2.text-star-gold
+              %i.fa.fa-star.mr-2.text-star-gold
+              %i.fa.fa-star.mr-2.text-star-gold
+          .d-inline-block.align-top
+            %p One of the best burgers I have had in my life. Service was only "OK" though. And what is with these crazy kids!?
+        %li.border.border-top-0.border-right-0.border-left-0.py-3
+          .d-inline-block
+            %a.mb-0.primary-link.d-block(href="#") Olive Oil
+            %small.text-secondary 1 January 2018 at 13:21 PST
+            %p.lead.mb-0
+              %i.fa.fa-star.mr-2.text-star-gold
+              %i.fa.fa-star.mr-2.text-star-gold
+              %i.fa.fa-star.mr-2.text-star-gold
+              %i.fa.fa-star.mr-2.text-star-gold
+              %i.fa.fa-star.mr-2.text-star-gold
+          .d-inline-block.align-top
+            %p OK, this is without question the best burger place in the state. You MUST come here. Don't wait. Come now.
+        %li.border.border-top-0.border-right-0.border-left-0.py-3
+          .d-inline-block
+            %a.mb-0.primary-link.d-block(href="#") Thomas Paine
+            %small.text-secondary 7 December 2017 at 12:36 PST
+            %p.lead.mb-0
+              %i.fa.fa-star.mr-2.text-star-gold
+          .d-inline-block.align-top
+            %p My god. You call this food?

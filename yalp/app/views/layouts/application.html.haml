@@ -1,0 +1,16 @@
+!!! 5
+%html(lang="en-US")
+  %head
+    %title Yalp
+    %meta(charset="UTF-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    = csrf_meta_tag
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    %link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous")
+    %link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico")
+  %body
+    %header
+      = render "shared/navbar"
+    %section.container-fluid.py-4.px-md-5.px-sm-4.px-xs-2
+      = yield

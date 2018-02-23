@@ -1,0 +1,14 @@
+%section.col-lg-5.col-md-7.col-sm-10.mx-auto
+  %p.lead
+    %i.fa.fa-sign-in.mr-2(area-hidden="true")
+    Sign in
+  %form.border.rounded.bg-light.p-3
+    .form-row
+      .form-group.col-12
+        %label(for="email") Email
+        %input(type="email" class="form-control" id="email" name="email" placeholder="Email Address")
+    .form-row
+      .form-group.col-12
+        %label(for="password") Password
+        %input(type="password" class="form-control" id="password" name="password" placeholder="Password")
+    = submit_tag "Submit", class: "btn primary-btn"

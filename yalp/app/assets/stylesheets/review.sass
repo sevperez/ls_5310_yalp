@@ -1,0 +1,22 @@
+// Styles - review.sass
+
+.review-list
+  list-style: none
+  padding: 0
+  li
+    div:first-child
+      width: 200px
+      margin: 0
+    div:last-child
+      width: -webkit-calc(100% - 205px)
+      width:    -moz-calc(100% - 205px)
+      width:         calc(100% - 205px)
+
+@media (max-width: $min-tablet)
+  .review-list
+    li
+      div:first-child
+        width: 100%
+        margin-bottom: 10px
+      div:last-child
+        width: 100%

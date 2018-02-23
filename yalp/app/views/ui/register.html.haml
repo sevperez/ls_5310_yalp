@@ -1,0 +1,41 @@
+:javascript
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+    
+    $('.popover-dismiss').popover({
+      trigger: 'focus'
+    });
+  })
+
+%section.col-lg-9.col-md-10.mx-auto
+  %p.lead
+    %i.fa.fa-user-circle-o.mr-2(area-hidden="true")
+    User Registration
+  %form.border.rounded.bg-light.p-3
+    .form-row
+      .form-group.col-12
+        %label(for="full_name") Full Name
+        %input(type="text" class="form-control" id="full_name" name="full_name" placeholder="First and Last Name")
+    .form-row
+      .form-group.col-md-6
+        %label(for="email") Email
+        %input(type="text" class="form-control" id="email" name="email" placeholder="Email Address")
+      .form-group.col-md-6
+        %label(for="timezone") Timezone
+        %small.text-secondary
+          %a(class="popover-anchor text-secondary" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="What is this for?" data-content="Your timezone setting is used to personalize the display time throughout the application.")
+            %i.fa.fa-question-circle-o
+        = select_tag "timezone", time_zone_options_for_select("Pacific Time (US & Canada)", ActiveSupport::TimeZone.us_zones), class: "form-control"
+    .form-row
+      .form-group.col-12
+        %label(for="password") Password
+        %input(type="password" class="form-control" id="password" name="password" placeholder="Password")
+    .form-row
+      .form-group.col-12
+        %label(for="motto") Personal Motto
+        %small.text-secondary
+          %a(class="popover-anchor text-secondary" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="What is this for?" data-content="Your personal motto will be displayed on your profile page. Mottos may have a maximum of 250 characters.")
+            %i.fa.fa-question-circle-o
+        %textarea(class="form-control" id="motto" rows="5")
+    = submit_tag "Register", class: "btn primary-btn"
+    %button(type="reset" class="btn secondary-btn px-3") Reset
