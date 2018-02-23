@@ -1,0 +1,2 @@
+# RSPEC - SUPPORT - macros.rb
+
