@@ -34,7 +34,7 @@
           %button.btn.btn-outline-secondary
             %i.fa.fa-search
     .navbar-signin
-      - unless false
+      - unless logged_in?
         = link_to "", class: "btn white-outline-btn mx-lg-1" do
           %i.fa.fa-sign-in
           Sign In
@@ -46,7 +46,7 @@
           %button(type="button" class="btn white-outline-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
             %small
               %i.fa.fa-user-circle-o.mr-2
-              Popeye Perez
+              = current_user.full_name
           .dropdown-menu
             %a(href="#" class="dropdown-item")
               %small
