@@ -16,7 +16,7 @@
                 Add Business
             .dropdown-divider
             - Category.order("name ASC").each do |category|
-              = link_to "#", class: "dropdown-item" do
+              = link_to businesses_category_path(category), class: "dropdown-item" do
                 %small= category.name.titleize
       %li.nav-item.dropdown
         .btn-group

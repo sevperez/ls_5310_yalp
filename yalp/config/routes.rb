@@ -13,6 +13,13 @@ Rails.application.routes.draw do
   # Businesses
   resources :businesses, only: [:index, :show]
   
+  # Categories
+  resources :categories, only: [] do
+    member do
+      get "/businesses", to: "categories#businesses"
+    end
+  end
+  
   # UI mockup controller -- development only
   get "ui(/:action)", controller: "ui"
 end
