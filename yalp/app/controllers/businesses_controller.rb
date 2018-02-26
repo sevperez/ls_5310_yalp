@@ -7,6 +7,7 @@ class BusinessesController < ApplicationController
   end
   
   def show
+    @review = Review.new
   end
   
   def new

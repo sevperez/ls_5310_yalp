@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   get "/sign_out", to: "sessions#destroy"
   
   # Businesses
-  resources :businesses, only: [:index, :show, :new, :create]
+  resources :businesses, only: [:index, :show, :new, :create] do
+    member do
+      post "/review", to: "reviews#create"
+    end
+  end
   
   # Categories
   resources :categories, only: [] do

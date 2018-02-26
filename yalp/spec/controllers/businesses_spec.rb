@@ -19,9 +19,15 @@ describe BusinessesController do
   describe "GET show" do
     let!(:business) { Fabricate(:business) }
     
+    before(:each) { get :show, params: { id: business.slug } }
+    
     it "sets @business" do
-      get :show, params: { id: business.slug }
       expect(assigns(:business)).to eq(business)
+    end
+    
+    it "sets @review" do
+      expect(assigns(:review)).to be_instance_of(Review)
+      expect(assigns(:review).new_record?).to be true
     end
   end
   
