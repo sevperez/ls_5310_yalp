@@ -1,7 +1,7 @@
 %li.list-group-item
   .d-inline-block.align-top
     %span.d-block.badge.category-badge.mb-2
-      = link_to business.category.name.titleize, "#", class: "badge-link"
+      = link_to business.category.name.titleize, businesses_category_path(business.category), class: "badge-link"
     %p.lead.mb-1
       %i.fa.fa-building.mr-2(area-hidden="true")
       = link_to business.name, business_path(business), class: "primary-link"

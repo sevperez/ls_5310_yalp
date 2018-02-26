@@ -15,4 +15,13 @@ describe BusinessesController do
     
     it "sorts businesses by star rating"
   end
+  
+  describe "GET show" do
+    let!(:business) { Fabricate(:business) }
+    
+    it "sets @business" do
+      get :show, params: { id: business.slug }
+      expect(assigns(:business)).to eq(business)
+    end
+  end
 end
