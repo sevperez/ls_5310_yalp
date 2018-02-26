@@ -1,32 +1,33 @@
 %nav#main_nav.navbar.navbar-expand-lg.navbar-light.bg-primary-red.px-3.border.border-top-0.border-left-0.border-right-0.sticky-top
-  %a(href="#" class="navbar-brand font-pacifico") Yalp
+  = link_to "Yalp", root_path, class: "navbar-brand font-pacifico"
   %button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_nav" aria-controls="navbar_nav" aria-expanded="false" aria-label="Toggle navigation")
     %span.navbar-toggler-icon
   .collapse.navbar-collapse(id="navbar_nav")
     %ul.navbar-nav.mr-auto
       %li.nav-item.dropdown
         .btn-group
-          = link_to "Businesses", "#", class: "btn btn-link nav-link"
+          = link_to "Businesses", businesses_path, class: "btn btn-link nav-link"
           %a(href="#" class="btn btn-link nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
             %span.sr-only Toggle Dropdown
           .dropdown-menu
-            = link_to "#", class: "dropdown-item" do
-              %small
-                %i.fa.fa-plus.mr-1
-                Add Business
-            .dropdown-divider
-            - ["Food and Drink", "Shopping", "Lodging", "Services", "Activities"].sort.each do |category|
-              = link_to "#", class: "dropdown-item" do
-                %small= category
+            - if logged_in?
+              = link_to new_business_path, class: "dropdown-item" do
+                %small
+                  %i.fa.fa-plus.mr-1
+                  Add Business
+              .dropdown-divider
+            - Category.order("name ASC").each do |category|
+              = link_to businesses_category_path(category), class: "dropdown-item" do
+                %small= category.name.titleize
       %li.nav-item.dropdown
         .btn-group
           = link_to "Reviews", "#", class: "btn btn-link nav-link"
           %a(href="#" class="btn btn-link nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
             %span.sr-only Toggle Dropdown
           .dropdown-menu
-            - ["Food and Drink", "Shopping", "Lodging", "Services", "Activities"].sort.each do |category|
+            - Category.order("name ASC").each do |category|
               = link_to "#", class: "dropdown-item" do
-                %small= category
+                %small= category.name.titleize
     %form.form-inline.mx-lg-3
       .input-group.w-100
         %input(type="text" class="form-control" placeholder="Search" aria-label="Search")

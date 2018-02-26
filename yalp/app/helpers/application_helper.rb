@@ -55,4 +55,8 @@ module ApplicationHelper
       ["Wyoming", "WY"]
     ]
   end
+  
+  def display_hour(datetime)
+    "#{datetime.hour}:00"
+  end
 end

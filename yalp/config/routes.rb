@@ -10,6 +10,16 @@ Rails.application.routes.draw do
   post "/sign_in", to: "sessions#create"
   get "/sign_out", to: "sessions#destroy"
   
+  # Businesses
+  resources :businesses, only: [:index, :show, :new, :create]
+  
+  # Categories
+  resources :categories, only: [] do
+    member do
+      get "/businesses", to: "categories#businesses"
+    end
+  end
+  
   # UI mockup controller -- development only
   get "ui(/:action)", controller: "ui"
 end
