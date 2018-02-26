@@ -22,4 +22,42 @@ describe Business do
     let(:item_type_sym) { :business }
     let(:item_attr) { :name }
   end
+  
+  context "methods" do
+    describe "#calculate_average_star_score" do
+      let!(:bus) { Fabricate(:business) }
+      
+      it "returns nil when no reviews exist" do
+        expect(bus.calculate_average_star_score).to be_nil
+      end
+      
+      it "when scores exist, returns the average, to one decimal place" do
+        Fabricate(:review, stars: "2", business: bus)
+        Fabricate(:review, stars: "4", business: bus)
+        Fabricate(:review, stars: "5", business: bus)
+        
+        expect(bus.calculate_average_star_score).to eq(3.7)
+      end
+    end
+    
+    describe "#update_average_star_score" do
+      let!(:bus) { Fabricate(:business) }
+      
+      it "updates the average_star_score column when first review is added" do
+        Fabricate(:review, stars: "2", business: bus)
+
+        bus.update_average_star_score
+        expect(bus.average_star_score).to eq(2)
+      end
+      
+      it "updates the average_star_score column when additional reviews are added" do
+        Fabricate(:review, stars: "2", business: bus)
+        Fabricate(:review, stars: "4", business: bus)
+        Fabricate(:review, stars: "5", business: bus)
+
+        bus.update_average_star_score
+        expect(bus.average_star_score).to eq(3.7)
+      end
+    end
+  end
 end

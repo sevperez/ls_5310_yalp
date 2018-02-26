@@ -27,6 +27,10 @@ describe ReviewsController do
           expect(bus.reviews.first.content).to eq(valid_input[:content])
         end
         
+        it "updates the business' average star score" do
+          expect(bus.reload.average_star_score).to eq(3)
+        end
+        
         it "associates a new review with the current user" do
           expect(test_user.reviews.first.content).to eq(valid_input[:content])
         end

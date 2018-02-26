@@ -3,7 +3,7 @@ class BusinessesController < ApplicationController
   before_action :set_business, only: [:show]
   
   def index
-    @businesses = Business.all
+    @businesses = Business.sort_by_stars_then_name(Business.all)
   end
   
   def show

@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
     @review.business = business
     
     if @review.save
+      business.update_average_star_score
       flash[:success] = "Your review has been added!"
       redirect_to business_path(business)
     else

@@ -15,12 +15,13 @@
     %p.lead.mb-1
       %i.fa.fa-building.mr-2(area-hidden="true")
       = @business.name
+    %small.d-block.w-100.text-secondary= "Reviews: #{@business.review_count}"
     %p.lead.mb-1.pb-2.border.border-left-0.border-right-0.border-top-0
-      %i.fa.fa-star.mr-2.text-star-gold
-      %i.fa.fa-star.mr-2.text-star-gold
-      %i.fa.fa-star.mr-2.text-star-gold
-      %i.fa.fa-star.mr-2.text-star-gold
-      %i.fa.fa-star-half-o.mr-2.text-star-gold
+      - full_stars, star_remainder = @business.average_star_score.to_f.divmod(1)
+      - full_stars.times do |_|
+        %i.fa.fa-star.mr-2.text-star-gold
+      - if star_remainder >= 0.5
+        %i.fa.fa-star-half-o.mr-2.text-star-gold
     .d-inline-block.my-2.align-top
       = link_to "Website", @business.website, class: "primary-link mb-1", target: :_blank
       %p.mb-0= @business.address
@@ -39,49 +40,20 @@
             %i.fa.fa-plus-circle.mr-2(aria-hidden="true")
             Add a Review
     .col-12
-      %form#review-form.collapse.border.rounded.p-3.my-4.bg-light
-        .form-group.star_rating
-          %label.d-inline-block.mr-2(for="stars")
-            %i.fa.fa-star.mr-2
-            Stars
-          = select_tag "stars", options_for_select((1..5).to_a), class: "form-control d-inline-block"
-        .form-group
-          %label(for="content") Content
-          %small.text-secondary
-            %a(class="popover-anchor text-secondary" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="What is this for?" data-content="What did you think of this business? What should other users know before they go to this business?")
-              %i.fa.fa-question-circle-o
-          %textarea(class="form-control" id="importance_comment" rows="5")
-        = submit_tag "Submit", class: "btn primary-btn"
-        %button(type="reset" class="btn secondary-btn px-3") Reset
+      #review-form.collapse.border.rounded.p-3.my-4.bg-light
+        = form_for [@business, @review], { url: review_business_path } do |f|
+          .form-group.star_rating
+            = f.label :stars, class: "d-inline-block mr-2" do
+              %i.fa.fa-star.mr-2
+              Stars
+            = f.select :stars, options_for_select((1..5).to_a), {}, { class: "form-control d-inline-block" }
+          .form-group
+            = f.label :content, "Content"
+            %small.text-secondary
+              %a(class="popover-anchor text-secondary" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="What is this for?" data-content="What did you think of this business? What should other users know before they go to this business?")
+                %i.fa.fa-question-circle-o
+            = f.text_area :content, class: "form-control", rows: "5"
+          = f.submit "Submit", class: "btn primary-btn"
+          %button(type="reset" class="btn secondary-btn px-3") Reset
       %ul.review-list
-        %li.border.border-top-0.border-right-0.border-left-0.py-3
-          .d-inline-block
-            %a.mb-0.primary-link.d-block(href="#") Popeye Perez
-            %small.text-secondary 18 January 2018 at 18:57 PST
-            %p.lead.mb-0
-              %i.fa.fa-star.mr-2.text-star-gold
-              %i.fa.fa-star.mr-2.text-star-gold
-              %i.fa.fa-star.mr-2.text-star-gold
-              %i.fa.fa-star.mr-2.text-star-gold
-          .d-inline-block.align-top
-            %p One of the best burgers I have had in my life. Service was only "OK" though. And what is with these crazy kids!?
-        %li.border.border-top-0.border-right-0.border-left-0.py-3
-          .d-inline-block
-            %a.mb-0.primary-link.d-block(href="#") Olive Oil
-            %small.text-secondary 1 January 2018 at 13:21 PST
-            %p.lead.mb-0
-              %i.fa.fa-star.mr-2.text-star-gold
-              %i.fa.fa-star.mr-2.text-star-gold
-              %i.fa.fa-star.mr-2.text-star-gold
-              %i.fa.fa-star.mr-2.text-star-gold
-              %i.fa.fa-star.mr-2.text-star-gold
-          .d-inline-block.align-top
-            %p OK, this is without question the best burger place in the state. You MUST come here. Don't wait. Come now.
-        %li.border.border-top-0.border-right-0.border-left-0.py-3
-          .d-inline-block
-            %a.mb-0.primary-link.d-block(href="#") Thomas Paine
-            %small.text-secondary 7 December 2017 at 12:36 PST
-            %p.lead.mb-0
-              %i.fa.fa-star.mr-2.text-star-gold
-          .d-inline-block.align-top
-            %p My god. You call this food?
+        = render @business.reviews
