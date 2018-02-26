@@ -55,5 +55,8 @@
             = f.text_area :content, class: "form-control", rows: "5"
           = f.submit "Submit", class: "btn primary-btn"
           %button(type="reset" class="btn secondary-btn px-3") Reset
-      %ul.review-list
-        = render @business.reviews
+      - if @business.reviews.count > 0
+        %ul.review-list
+          = render @business.reviews
+      - else
+        %p No reviews yet...

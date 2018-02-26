@@ -18,3 +18,20 @@ end
 50.times do |_|
   Fabricate(:business, owner: User.all.sample)
 end
+
+# Reviews
+User.all.each do |u|
+  next if u.email == "popeye@pops.com" || u.email == "olive@oil.com"
+  
+  Business.all.each do |b|
+    if [true, false, false, false].sample
+      content = ""
+      
+      if [true, false, false].sample
+        content = Faker::Lorem.paragraph([1, 2].sample)
+      end
+      
+      Fabricate(:review, user: u, business: b, content: content)
+    end
+  end
+end
