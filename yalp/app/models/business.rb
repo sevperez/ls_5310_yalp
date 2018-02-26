@@ -10,6 +10,8 @@ class Business < ActiveRecord::Base
   
   belongs_to :category
   belongs_to :owner, foreign_key: "user_id", class_name: "User"
+  has_many :reviews
+  has_many :reviewers, through: :reviews, source: :user
   
   set_slug_key :name
 end

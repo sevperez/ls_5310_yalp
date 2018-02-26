@@ -13,6 +13,8 @@ describe Business do
     it { should validate_presence_of(:phone_number).with_message("A phone number is required.") }
     it { should belong_to(:owner).with_foreign_key("user_id") }
     it { should belong_to(:category) }
+    it { should have_many(:reviews) }
+    it { should have_many(:reviewers) }
   end
   
   # slugging
