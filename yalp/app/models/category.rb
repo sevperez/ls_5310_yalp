@@ -6,4 +6,10 @@ class Category < ActiveRecord::Base
   has_many :businesses
   
   set_slug_key :name
+  
+  def self.select_options
+    self.order("name ASC").map do |cat|
+      [cat.name, cat.id]
+    end
+  end
 end

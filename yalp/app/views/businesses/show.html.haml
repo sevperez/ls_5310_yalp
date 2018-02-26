@@ -8,6 +8,7 @@
   })
 
 %section.col-10.mx-auto
+  = render "shared/messages"
   %section.business-description.mb-3.border.rounded.bg-light.p-3
     %span.d-block.badge.category-badge.mb-2
       = link_to @business.category.name.titleize, businesses_category_path(@business.category), class: "badge-link"

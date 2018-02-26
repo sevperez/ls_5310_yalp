@@ -1,0 +1,55 @@
+:javascript
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+    
+    $('.popover-dismiss').popover({
+      trigger: 'focus'
+    });
+  })
+
+%section.col-lg-9.col-md-10.mx-auto
+  = render "shared/messages"
+  %p.lead
+    %i.fa.fa-plus-circle.mr-2(area-hidden="true")
+    Add Business
+  .border.rounded.bg-light.p-3
+    = bootstrap_form_for(@business) do |f|
+      .form-row
+        .form-group.col-12.mb-0
+          = f.text_field :name, placeholder: "Your Business", label: "Business Name"
+      .form-row
+        .form-group.col-12.mb-0
+          = f.label :category_id, "Category"
+          %small.text-secondary
+            %a(class="popover-anchor text-secondary" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="What is this for?" data-content="The category type will determine where your business is displayed in our directory.")
+              %i.fa.fa-question-circle-o
+          = f.select :category_id, options_for_select(Category.select_options), { skip_label: true }, { class: "form-control" }
+      .form-row
+        .form-group.col-12.mb-0
+          = f.text_field :address, placeholder: "Address", label: "Address"
+      .form-row
+        .form-group.col-md-4.mb-0
+          = f.text_field :city, placeholder: "City"
+        .form-group.col-md-4.mb-0
+          = f.select :state, options_for_select(us_states), { label: "State" }, { class: "form-control" }
+        .form-group.col-md-4.mb-0
+          = f.text_field :zip_code, placeholder: "Zip Code", label: "Zip Code"
+      .form-row
+        .form-group.col-md-6.mb-0
+          = f.text_field :phone_number, placeholder: "555-555-5555", label: "Phone Number"
+        .form-group.col-md-6.mb-0
+          = f.text_field :website, placeholder: "www.yourwebsite.com", label: "Website"
+      .form-row
+        .form-group.col-md-6.mb-0
+          = f.label :open_hr, "Opening Time"
+          %small.text-secondary (24 hr clock)
+          = f.select :open_hr, options_for_select((0..23).to_a, "9"), skip_label: true
+        .form-group.col-md-6.mb-0
+          = f.label :close_hr, "Closing Time"
+          %small.text-secondary (24 hr clock)
+          = f.select :close_hr, options_for_select((0..23).to_a, "17"), skip_label: true
+      .form-row
+        .form-group.col-12.mb-0
+          = f.text_area :description, rows: "5"
+      = f.submit "Register", class: "btn primary-btn"
+      %button(type="reset" class="btn secondary-btn px-3") Reset

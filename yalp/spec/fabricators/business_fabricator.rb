@@ -9,6 +9,6 @@ Fabricator(:business) do
   website { Faker::Internet.url }
   open_hr { (8..11).to_a.sample.to_s.rjust(2, "0") + ":00" }
   close_hr { (17..22).to_a.sample.to_s + ":00" }
-  category { Category.count > 0 ? Category.all.sample : Fabricate(:category) }
+  category_id { Category.count > 0 ? Category.all.pluck(:id).sample : Fabricate(:category).id }
   owner { Fabricate(:user) }
 end

@@ -10,11 +10,12 @@
           %a(href="#" class="btn btn-link nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
             %span.sr-only Toggle Dropdown
           .dropdown-menu
-            = link_to "#", class: "dropdown-item" do
-              %small
-                %i.fa.fa-plus.mr-1
-                Add Business
-            .dropdown-divider
+            - if logged_in?
+              = link_to new_business_path, class: "dropdown-item" do
+                %small
+                  %i.fa.fa-plus.mr-1
+                  Add Business
+              .dropdown-divider
             - Category.order("name ASC").each do |category|
               = link_to businesses_category_path(category), class: "dropdown-item" do
                 %small= category.name.titleize
