@@ -5,7 +5,7 @@ popeye = User.create(full_name: "Popeye Perez", email: "popeye@pops.com", passwo
 
 olive = User.create(full_name: "Olive Oil", email: "olive@oil.com", password: "password", timezone: "Pacific Time (US & Canada)", motto: "If you can't beat 'em, join 'em.")
 
-20.times do |_|
+10.times do |_|
   Fabricate(:user, password: "password")
 end
 
@@ -15,7 +15,7 @@ end
 end
 
 # Businesses
-50.times do |_|
+30.times do |_|
   Fabricate(:business, owner: User.all.sample)
 end
 
