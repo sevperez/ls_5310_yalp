@@ -57,6 +57,6 @@
           %button(type="reset" class="btn secondary-btn px-3") Reset
       - if @business.reviews.count > 0
         %ul.review-list
-          = render @business.reviews, show_business: false
+          = render Review.sort_by_newest(@business.reviews), show_business: false, show_name: true
       - else
         %p No reviews yet...

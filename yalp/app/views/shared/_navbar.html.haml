@@ -49,7 +49,7 @@
               %i.fa.fa-user-circle-o.mr-2
               = current_user.full_name
           .dropdown-menu
-            %a(href="#" class="dropdown-item")
+            = link_to user_path(current_user), class: "dropdown-item" do
               %small
                 %i.fa.fa-user.pr-2
                 Profile

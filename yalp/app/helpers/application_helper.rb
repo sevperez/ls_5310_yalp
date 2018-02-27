@@ -7,6 +7,14 @@ module ApplicationHelper
     datetime.strftime("%B %-d, %Y; %l:%M%P %Z")
   end
   
+  def format_date(datetime)
+    if current_user
+      datetime = datetime.in_time_zone(current_user.timezone)
+    end
+    
+    datetime.strftime("%B %-d, %Y")
+  end
+  
   def us_states
     [
       ["Alabama", "AL"],

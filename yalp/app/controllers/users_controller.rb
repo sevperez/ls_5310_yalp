@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   before_action :require_no_user, only: [:new, :create]
+  before_action :set_user, only: [:show]
+  
+  def show
+  end
   
   def new
     @user = User.new
@@ -22,5 +26,9 @@ class UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(:full_name, :email, :password, :timezone, :motto)
+  end
+  
+  def set_user
+    @user = User.find_by(slug: params[:id])
   end
 end

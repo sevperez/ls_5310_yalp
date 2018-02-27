@@ -20,6 +20,14 @@ describe UsersController do
     end
   end
   
+  describe "GET show" do
+    it "sets @user" do
+      set_test_user
+      get :show, params: { id: test_user.slug }
+      expect(assigns(:user)).to eq(test_user)
+    end
+  end
+  
   describe "POST create" do
     context "valid input" do
       let!(:valid_user_params) { Fabricate.attributes_for(:user) }
