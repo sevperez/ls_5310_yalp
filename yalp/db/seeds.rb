@@ -16,7 +16,8 @@ end
 
 # Businesses
 100.times do |_|
-  Fabricate(:business, owner: User.all.sample)
+  b = Fabricate(:business, owner: User.all.sample)
+  b.update_average_star_score
 end
 
 # Reviews
@@ -31,7 +32,7 @@ User.all.each do |u|
         content = Faker::Lorem.paragraph([1, 2].sample)
       end
       
-      Fabricate(:review, user: u, business: b, content: content)
+      Fabricate(:review, user: u, business: b, content: content, created_at: DateTime.now - (1..100).to_a.sample)
     end
   end
 end

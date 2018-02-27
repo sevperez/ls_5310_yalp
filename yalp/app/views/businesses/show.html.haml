@@ -35,13 +35,13 @@
       .clearfix.border.border-top-0.border-left-0.border-right-0
         %p.lead.float-left
           Reviews
-        - unless current_user.has_reviewed?(@business)
+        - if current_user && !current_user.has_reviewed?(@business)
           %a(data-toggle="collapse" href="#review-form" role="button" aria-expanded="false" aria-controls="review_form" id="review_open_btn" class="primary-link float-right")
             %p.lead
               %i.fa.fa-plus-circle.mr-2(aria-hidden="true")
               Add a Review
     .col-12
-      - unless current_user.has_reviewed?(@business)
+      - if current_user && !current_user.has_reviewed?(@business)
         #review-form.collapse.border.rounded.p-3.my-4.bg-light
           = form_for [@business, @review], { url: review_business_path } do |f|
             .form-group.star_rating
