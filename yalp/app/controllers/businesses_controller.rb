@@ -27,6 +27,20 @@ class BusinessesController < ApplicationController
     end
   end
   
+  def search
+    term = params[:term].blank? ? nil : params[:term].downcase
+    
+    if term.nil?
+      search_results = []
+    elsif is_state?(term)
+      search_results = Business.where(state: term.upcase)
+    else
+      search_results = Business.all.select { |b| b.all_text.include?(term) }
+    end
+    
+    @results = Business.sort_by_stars_then_name(search_results)
+  end
+  
   private
   
   def set_business

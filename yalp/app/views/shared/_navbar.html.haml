@@ -28,11 +28,11 @@
             - Category.order("name ASC").each do |category|
               = link_to reviews_category_path(category), class: "dropdown-item" do
                 %small= category.name.titleize
-    %form.form-inline.mx-lg-3
+    = form_tag search_businesses_path, class: "form-inline.mx-lg-3", method: "get" do
       .input-group.w-100
-        %input(type="text" class="form-control" placeholder="Search" aria-label="Search")
+        = text_field_tag :term, nil, { class: "form-control", placeholder: "Search" }
         .input-group-append
-          %button.btn.btn-outline-secondary
+          = button_tag(type: "submit", class: "btn btn-outline-secondary") do
             %i.fa.fa-search
     .navbar-signin
       - unless logged_in?

@@ -30,6 +30,10 @@ class Business < ActiveRecord::Base
     self.save
   end
   
+  def all_text
+    "#{self.name} #{self.description} #{self.city} #{self.state} #{self.zip_code} #{self.address} #{self.website} #{self.phone_number}".downcase
+  end
+  
   def self.sort_by_stars_then_name(businesses)
     businesses.sort do |a, b|
       if a.average_star_score == b.average_star_score

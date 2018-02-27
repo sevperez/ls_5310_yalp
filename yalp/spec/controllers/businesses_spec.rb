@@ -114,4 +114,38 @@ describe BusinessesController do
       it_behaves_like "root_redirect"
     end
   end
+  
+  describe "GET search" do
+    let!(:bus) { Fabricate(:business, name: "Fry's Electronics", description: "A pretty ok electronics store.", address: "340 Portage Ave", city: "Palo Alto", state: "CA", zip_code: "94306", phone_number: "650-496-6000", website: "www.frys.com") }
+    
+    it "sets @results to empty array if no results" do
+      get :search, params: { term: "San Francisco" }
+      expect(assigns(:results).count).to eq(0)
+    end
+    
+    it "sets @results to include relevant businesses if matching city field" do
+      get :search, params: { term: "Palo Alto" }
+      expect(assigns(:results).first).to eq(bus)
+    end
+    
+    it "sets @results to include relevant businesses if matching description" do
+      get :search, params: { term: "electronics store" }
+      expect(assigns(:results).first).to eq(bus)
+    end
+    
+    it "sets @results to include relevant businesses if matching state field" do
+      get :search, params: { term: "CA" }
+      expect(assigns(:results).first).to eq(bus)
+    end
+    
+    it "sets @results to include relevant businesses if matching name field" do
+      get :search, params: { term: "Fry's" }
+      expect(assigns(:results).first).to eq(bus)
+    end
+    
+    it "sets @results to include relevant businesses if matching zip code" do
+      get :search, params: { term: "94306" }
+      expect(assigns(:results).first).to eq(bus)
+    end
+  end
 end
