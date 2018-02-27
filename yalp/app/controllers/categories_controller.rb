@@ -2,7 +2,10 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:businesses, :reviews]
 
   def businesses
-    @businesses = Business.sort_by_stars_then_name(@category.businesses)
+    page_num = params[:page].to_i
+    @num_pages = @category.number_pages
+    
+    @businesses = Business.retrieve_by_stars(page_num, @category)
   end
   
   def reviews

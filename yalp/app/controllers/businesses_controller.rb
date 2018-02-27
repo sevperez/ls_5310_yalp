@@ -3,7 +3,9 @@ class BusinessesController < ApplicationController
   before_action :set_business, only: [:show]
   
   def index
-    @businesses = Business.sort_by_stars_then_name(Business.all)
+    page_num = params[:page].to_i
+    @num_pages = Business.number_pages
+    @businesses = Business.retrieve_by_stars(page_num)
   end
   
   def show
