@@ -5,12 +5,13 @@
     %p.lead.mb-1
       %i.fa.fa-building.mr-2(area-hidden="true")
       = link_to business.name, business_path(business), class: "primary-link"
+    %small.d-block.w-100.text-secondary= "Reviews: #{business.review_count}"
     %p.lead.mb-0.pb-2
-      %i.fa.fa-star.mr-2.text-star-gold
-      %i.fa.fa-star.mr-2.text-star-gold
-      %i.fa.fa-star.mr-2.text-star-gold
-      %i.fa.fa-star.mr-2.text-star-gold
-      %i.fa.fa-star-half-o.mr-2.text-star-gold
+      - full_stars, star_remainder = business.average_star_score.to_f.divmod(1)
+      - full_stars.times do |_|
+        %i.fa.fa-star.mr-2.text-star-gold
+      - if star_remainder >= 0.5
+        %i.fa.fa-star-half-o.mr-2.text-star-gold
     %p.mb-0= "#{business.city}, #{business.state}"
   .d-inline-block.align-top
     %p= business.description

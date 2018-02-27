@@ -5,7 +5,7 @@ popeye = User.create(full_name: "Popeye Perez", email: "popeye@pops.com", passwo
 
 olive = User.create(full_name: "Olive Oil", email: "olive@oil.com", password: "password", timezone: "Pacific Time (US & Canada)", motto: "If you can't beat 'em, join 'em.")
 
-20.times do |_|
+10.times do |_|
   Fabricate(:user, password: "password")
 end
 
@@ -15,6 +15,23 @@ end
 end
 
 # Businesses
-50.times do |_|
+30.times do |_|
   Fabricate(:business, owner: User.all.sample)
+end
+
+# Reviews
+User.all.each do |u|
+  next if u.email == "popeye@pops.com" || u.email == "olive@oil.com"
+  
+  Business.all.each do |b|
+    if [true, false, false, false].sample
+      content = ""
+      
+      if [true, false, false].sample
+        content = Faker::Lorem.paragraph([1, 2].sample)
+      end
+      
+      Fabricate(:review, user: u, business: b, content: content)
+    end
+  end
 end

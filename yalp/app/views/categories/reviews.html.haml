@@ -1,0 +1,7 @@
+%section.col-10.mx-auto
+  %p.lead.mb-2.text-center= @category.name.titleize
+  - if @reviews.length > 0
+    %ul.list-group.review-list
+      = render @reviews, show_business: true
+  - else
+    %p No reviews yet...

@@ -1,0 +1,18 @@
+%li.border.border-top-0.border-right-0.border-left-0.py-3
+  - if show_business
+    %p.lead.mb-1
+      %i.fa.fa-building.mr-2(area-hidden="true")
+      = link_to review.business.name, business_path(review.business), class: "primary-link"
+  .d-inline-block
+    = link_to review.user.full_name, "#", class: "mb-0 primary-link d-block"
+    %small.text-secondary= format_datetime(review.created_at)
+    %p.lead.mb-0
+      - review.stars.times do
+        %i.fa.fa-star.mr-2.text-star-gold
+  .d-inline-block.align-top.pl-md-4
+    - if review.content.blank?
+      %p
+        %small.text-secondary
+          %i No content.
+    - else
+      %p= review.content

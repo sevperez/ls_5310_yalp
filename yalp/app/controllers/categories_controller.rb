@@ -1,6 +1,25 @@
 class CategoriesController < ApplicationController
+  before_action :set_category, only: [:businesses, :reviews]
+
   def businesses
+    @businesses = Business.sort_by_stars_then_name(@category.businesses)
+  end
+  
+  def reviews
+    @reviews = []
+    
+    @category.businesses.each do |business|
+      business.reviews.each do |review|
+        @reviews << review
+      end
+    end
+    
+    @reviews.sort! { |a, b| b.created_at <=> a.created_at }
+  end
+  
+  private
+  
+  def set_category
     @category = Category.find_by(slug: params[:id])
-    @businesses = @category.businesses
   end
 end
