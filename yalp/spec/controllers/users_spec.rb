@@ -20,6 +20,14 @@ describe UsersController do
     end
   end
   
+  describe "GET show" do
+    it "sets @user" do
+      set_test_user
+      get :show, params: { id: test_user.slug }
+      expect(assigns(:user)).to eq(test_user)
+    end
+  end
+  
   describe "POST create" do
     context "valid input" do
       let!(:valid_user_params) { Fabricate.attributes_for(:user) }
@@ -68,6 +76,99 @@ describe UsersController do
         expect(session[:user_id]).to eq(test_user.id)
       end
       
+      it_behaves_like "danger_message"
+      it_behaves_like "root_redirect"
+    end
+  end
+  
+  describe "GET edit" do
+    before(:each) { set_test_user }
+    
+    context "authenticated user" do
+      context "current user" do
+        it "sets @user to the appropriate user" do
+          get :edit, params: { id: test_user.slug }
+          expect(assigns(:user)).to eq(test_user)
+        end
+      end
+      
+      context "other user" do
+        before(:each) do
+          get :edit, params: { id: Fabricate(:user).slug }
+        end
+      
+        it_behaves_like "danger_message"
+        it_behaves_like "root_redirect"
+      end
+    end
+    
+    context "unauthenticated user" do
+      before(:each) do
+        get :edit, params: { id: Fabricate(:user).slug }
+      end
+    
+      it_behaves_like "danger_message"
+      it_behaves_like "root_redirect"
+    end
+  end
+  
+  describe "PUT update" do
+    let!(:valid_user_params) { Fabricate.attributes_for(:user) }
+    
+    context "authenticated user" do
+      before(:each) { set_test_user }
+      
+      context "current_user" do
+        context "valid input" do
+          before(:each) do
+            put :update, params: { id: test_user.slug, user: valid_user_params }
+          end
+          
+          it "sets @user" do
+            expect(assigns(:user)).to eq(test_user)
+          end
+          
+          it "adjusts the user's attributes" do
+            expect(test_user.email).to eq(valid_user_params[:email])
+          end
+          
+          it "redirects to user_path" do
+            expect(response).to redirect_to(user_path(test_user))
+          end
+          
+          it_behaves_like "success_message"
+        end
+        
+        context "invalid input" do
+          let!(:invalid_user_params) { Fabricate.attributes_for(:user, email: "") }
+          
+          before(:each) do
+            put :update, params: { id: test_user.slug, user: invalid_user_params }
+          end
+          
+          it "does not update user attributes" do
+            expect(test_user.email).not_to eq(invalid_user_params[:email])
+          end
+          
+          it_behaves_like "danger_message"
+        end
+      end
+      
+      context "other user" do
+        before(:each) do
+          put :update, params: { id: Fabricate(:user).slug, user: valid_user_params }
+        end
+      
+        it_behaves_like "danger_message"
+        it_behaves_like "root_redirect"
+      end
+    end
+    
+    context "unauthenticated user" do
+      before(:each) do
+        put :update, params: { id: Fabricate(:user).slug, user: valid_user_params }
+      end
+    
       it_behaves_like "danger_message"
       it_behaves_like "root_redirect"
     end

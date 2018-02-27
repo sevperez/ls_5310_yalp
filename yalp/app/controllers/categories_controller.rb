@@ -6,15 +6,15 @@ class CategoriesController < ApplicationController
   end
   
   def reviews
-    @reviews = []
+    category_reviews = []
     
     @category.businesses.each do |business|
       business.reviews.each do |review|
-        @reviews << review
+        category_reviews << review
       end
     end
     
-    @reviews.sort! { |a, b| b.created_at <=> a.created_at }
+    @reviews = Review.sort_by_newest(category_reviews)
   end
   
   private

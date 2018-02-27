@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
   
   def require_current_user
-    unless current_user && current_user.id == params[:user_id].to_i
+    unless current_user && current_user.slug == params[:id]
       flash[:danger] = "You are not authorized for that action."
       redirect_to root_path
     end

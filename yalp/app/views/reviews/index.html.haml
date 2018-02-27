@@ -2,6 +2,6 @@
   %p.lead.mb-2.text-center All Reviews
   - if @reviews.length > 0
     %ul.list-group.review-list
-      = render @reviews, show_business: true
+      = render @reviews, show_business: true, show_name: true
   - else
     %p No reviews yet...

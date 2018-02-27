@@ -11,5 +11,5 @@
   = render "shared/messages"
   %p.lead
     %i.fa.fa-user-circle-o.mr-2(area-hidden="true")
-    User Registration
-  = render "form", url: "/register"
+    = "Edit Profile: #{@user.full_name}"
+  = render "form", url: user_path

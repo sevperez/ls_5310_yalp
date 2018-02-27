@@ -5,4 +5,10 @@ class Review < ActiveRecord::Base
   
   belongs_to(:user)
   belongs_to(:business)
+  
+  def self.sort_by_newest(reviews)
+    reviews.sort do |a, b|
+      b.created_at <=> a.created_at
+    end
+  end
 end
