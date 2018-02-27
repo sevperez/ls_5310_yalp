@@ -2,7 +2,9 @@ class ReviewsController < ApplicationController
   before_action :require_user, only: [:create]
   
   def index
-    @reviews = Review.order("created_at DESC")
+    page_num = params[:page].to_i
+    @num_pages = Review.number_pages
+    @reviews = Review.retrieve_by_newest(page_num)
   end
   
   def create

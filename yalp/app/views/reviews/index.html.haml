@@ -3,5 +3,25 @@
   - if @reviews.length > 0
     %ul.list-group.review-list
       = render @reviews, show_business: true, show_name: true
+    %nav.py-2(aria-label="Business page navigation")
+      %ul.pagination.justify-content-center
+        - if params[:page].to_i - 1 > 0
+          %li.page-item
+            = link_to reviews_path(page: params[:page].to_i - 1), class: "page-link primary-link" do
+              %i.fa.fa-angle-double-left
+        - @num_pages.times do |n|
+          - if n + 1 == params[:page].to_i || (params[:page].nil? && n == 0)
+            %li.page-item.active-page-link
+              = link_to "#{n + 1}", reviews_path(page: n + 1), class: "page-link primary-link"
+          - elsif n == 0
+            %li.page-item
+            = link_to "#{n + 1}", reviews_path(page: n + 1), class: "page-link primary-link"
+          - elsif (params[:page].to_i - n - 1).abs <= 2 || n + 1 == @num_pages
+            %li.page-item
+            = link_to "#{n + 1}", reviews_path(page: n + 1), class: "page-link primary-link"
+        - if params[:page].to_i + 1 <= @num_pages
+          %li.page-item
+            = link_to reviews_path(page: params[:page].to_i + 1), class: "page-link primary-link" do
+              %i.fa.fa-angle-double-right
   - else
     %p No reviews yet...

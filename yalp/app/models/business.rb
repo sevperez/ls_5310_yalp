@@ -1,6 +1,8 @@
 class Business < ActiveRecord::Base
   include Sluggable
   
+  BUSINESSES_PER_PAGE = 10
+  
   validates :name, presence: { message: "A business name is required." }, uniqueness: { message: "Sorry, that business name is taken." }
   validates :description, presence: { message: "A short description is required." }
   validates :address, presence: { message: "An address is required." }
@@ -34,6 +36,11 @@ class Business < ActiveRecord::Base
     "#{self.name} #{self.description} #{self.city} #{self.state} #{self.zip_code} #{self.address} #{self.website} #{self.phone_number}".downcase
   end
   
+  def self.number_pages
+    count = self.count
+    count == 0 ? 1 : (count.to_f / BUSINESSES_PER_PAGE).ceil
+  end
+  
   def self.sort_by_stars_then_name(businesses)
     businesses.sort do |a, b|
       if a.average_star_score == b.average_star_score
@@ -46,5 +53,19 @@ class Business < ActiveRecord::Base
         b.average_star_score <=> a.average_star_score
       end
     end
+  end
+  
+  def self.retrieve_by_stars(page_num, category=nil)
+    if category
+      return [] if page_num > category.number_business_pages
+      businesses = category.businesses
+    else
+      return [] if page_num > self.number_pages
+      businesses = self.all
+    end
+    
+    offset = page_num.nil? || page_num == 0 ? 0 : (page_num - 1) * BUSINESSES_PER_PAGE
+    page_businesses = self.sort_by_stars_then_name(businesses)
+    page_businesses[offset..offset + BUSINESSES_PER_PAGE - 1]
   end
 end
