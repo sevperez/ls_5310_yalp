@@ -16,7 +16,7 @@
           - elsif n == 0
             %li.page-item
             = link_to "#{n + 1}", reviews_path(page: n + 1), class: "page-link primary-link"
-          - elsif (params[:page].to_i - n).abs <= 2 || n + 1 == @num_pages
+          - elsif (params[:page].to_i - n - 1).abs <= 2 || n + 1 == @num_pages
             %li.page-item
             = link_to "#{n + 1}", reviews_path(page: n + 1), class: "page-link primary-link"
         - if params[:page].to_i + 1 <= @num_pages
