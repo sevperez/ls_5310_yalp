@@ -3,21 +3,26 @@ class CategoriesController < ApplicationController
 
   def businesses
     page_num = params[:page].to_i
-    @num_pages = @category.number_pages
+    @num_pages = @category.number_business_pages
     
     @businesses = Business.retrieve_by_stars(page_num, @category)
   end
   
   def reviews
-    category_reviews = []
+    page_num = params[:page].to_i
+    @num_pages = @category.number_review_pages
     
-    @category.businesses.each do |business|
-      business.reviews.each do |review|
-        category_reviews << review
-      end
-    end
+    @reviews = Review.retrieve_by_newest(page_num, @category)
     
-    @reviews = Review.sort_by_newest(category_reviews)
+    # category_reviews = []
+    
+    # @category.businesses.each do |business|
+    #   business.reviews.each do |review|
+    #     category_reviews << review
+    #   end
+    # end
+    
+    # @reviews = Review.sort_by_newest(category_reviews)
   end
   
   private

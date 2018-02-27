@@ -57,15 +57,15 @@ class Business < ActiveRecord::Base
   
   def self.retrieve_by_stars(page_num, category=nil)
     if category
-      return [] if page_num > category.number_pages
+      return [] if page_num > category.number_business_pages
       businesses = category.businesses
     else
-      return [] if page_num > Business.number_pages
-      businesses = Business.all
+      return [] if page_num > self.number_pages
+      businesses = self.all
     end
     
     offset = page_num.nil? || page_num == 0 ? 0 : (page_num - 1) * BUSINESSES_PER_PAGE
-    page_businesses = Business.sort_by_stars_then_name(businesses)
-    page_businesses[offset..offset + BUSINESSES_PER_PAGE]
+    page_businesses = self.sort_by_stars_then_name(businesses)
+    page_businesses[offset..offset + BUSINESSES_PER_PAGE - 1]
   end
 end
