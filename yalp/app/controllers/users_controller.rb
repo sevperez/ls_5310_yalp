@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_no_user, only: [:new, :create]
-  before_action :set_user, only: [:show]
+  before_action :require_current_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
   
   def show
   end
@@ -19,6 +20,19 @@ class UsersController < ApplicationController
     else
       flash[:danger] = "Hmm, looks like there was an error."
       render :new
+    end
+  end
+  
+  def edit
+  end
+  
+  def update
+    if @user.update(user_params)
+      flash[:success] = "Your profile has been updated!"
+      redirect_to user_path(@user)
+    else
+      flash[:danger] = "Hmm, looks like there was an error."
+      render :edit
     end
   end
   

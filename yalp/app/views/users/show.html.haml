@@ -1,5 +1,12 @@
 %section.col-10.mx-auto
-  %section.profile-description.mb-3.border.rounded.bg-light.p-3
+  = render "shared/messages"
+  %section.profile-description.mb-3.border.rounded.bg-light.p-3.position-relative
+    - if current_user == @user
+      .edit-profile-link
+        %small
+          = link_to edit_user_path(current_user), class: "primary-link" do
+            %i.fa.fa-pencil.mr-1(area-hidden="true")
+            Edit Profile
     %p.lead.mb-0
       %i.fa.fa-user-circle-o.mr-2(area-hidden="true")
       = @user.full_name

@@ -1,0 +1,29 @@
+.border.rounded.bg-light.p-3
+  = bootstrap_form_for(@user, url: url) do |f|
+    .form-row
+      .form-group.col-12.mb-0
+        = f.label :full_name, "Full Name"
+        = f.text_field :full_name, class: "form-control", placeholder: "First and Last Name", skip_label: true
+    .form-row
+      .form-group.col-md-6.mb-0
+        = f.label :email, "Email"
+        = f.email_field :email, class: "form-control", placeholder: "Email Address", skip_label: true
+      .form-group.col-md-6.mb-0
+        = f.label :timezone, "Timezone"
+        %small.text-secondary
+          %a(class="popover-anchor text-secondary" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="What is this for?" data-content="Your timezone setting is used to personalize the display time throughout the application.")
+            %i.fa.fa-question-circle-o
+        = f.select :timezone, time_zone_options_for_select("Pacific Time (US & Canada)", ActiveSupport::TimeZone.us_zones), { skip_label: true }, { class: "form-control" }
+    .form-row
+      .form-group.col-12.mb-0
+        = f.label :password, "Password"
+        = f.password_field :password, class: "form-control", placeholder: "Password", skip_label: true
+    .form-row
+      .form-group.col-12.mb-0
+        = f.label :motto, "Personal Motto"
+        %small.text-secondary
+          %a(class="popover-anchor text-secondary" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="What is this for?" data-content="Your personal motto will be displayed on your profile page. Mottos may have a maximum of 250 characters.")
+            %i.fa.fa-question-circle-o
+        = f.text_area :motto, class: "form-control", rows: "5", skip_label: true
+    = f.submit "#{@user.new_record? ? 'Register' : 'Update'}", class: "btn primary-btn"
+    %button(type="reset" class="btn secondary-btn px-3") Reset
