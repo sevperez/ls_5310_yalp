@@ -3,6 +3,20 @@
 require "rails_helper"
 
 describe ReviewsController do
+  describe "GET index" do
+    let!(:bus) { Fabricate(:business) }
+    let!(:rev_1) { Fabricate(:review, business: bus) }
+    let!(:rev_2) { Fabricate(:review, business: bus) }
+    let!(:rev_3) { Fabricate(:review, business: bus) }
+    
+    before(:each) { get :index }
+    
+    it "sets @reviews to all reviews" do
+      expect(assigns(:reviews).first).to be_instance_of(Review)
+      expect(assigns(:reviews).count).to eq(3)
+    end
+  end
+  
   describe "POST create" do
     let!(:bus) { Fabricate(:business) }
     let!(:valid_input) { { stars: "3", content: Faker::Lorem.paragraph } }

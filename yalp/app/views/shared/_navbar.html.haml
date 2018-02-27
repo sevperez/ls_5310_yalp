@@ -21,12 +21,12 @@
                 %small= category.name.titleize
       %li.nav-item.dropdown
         .btn-group
-          = link_to "Reviews", "#", class: "btn btn-link nav-link"
+          = link_to "Reviews", reviews_path, class: "btn btn-link nav-link"
           %a(href="#" class="btn btn-link nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
             %span.sr-only Toggle Dropdown
           .dropdown-menu
             - Category.order("name ASC").each do |category|
-              = link_to "#", class: "dropdown-item" do
+              = link_to reviews_category_path(category), class: "dropdown-item" do
                 %small= category.name.titleize
     %form.form-inline.mx-lg-3
       .input-group.w-100

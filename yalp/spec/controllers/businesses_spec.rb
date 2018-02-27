@@ -7,13 +7,22 @@ describe BusinessesController do
     let!(:kibble_nook) { Fabricate(:business, name: "Kibble Nook") }
     let!(:bobs_burgers) { Fabricate(:business, name: "Bob's Burgers") }
     let!(:construction_site) { Fabricate(:business, name: "Construction Site") }
+    let!(:rev_1) { Fabricate(:review, business: kibble_nook, stars: 5) }
+    let!(:rev_2) { Fabricate(:review, business: bobs_burgers, stars: 3) }
+
+    before(:each) do
+      Business.all.each { |b| b.update_average_star_score }
+      get :index
+    end
     
     it "sets @businesses" do
-      get :index
       expect(assigns(:businesses).first).to be_instance_of(Business)
     end
     
-    it "sorts businesses by star rating"
+    it "sorts businesses by star rating" do
+      expect(assigns(:businesses).first).to eq(kibble_nook)
+      expect(assigns(:businesses).last).to eq(construction_site)
+    end
   end
   
   describe "GET show" do

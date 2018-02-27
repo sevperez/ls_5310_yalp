@@ -17,10 +17,14 @@ Rails.application.routes.draw do
     end
   end
   
+  # Reviews
+  resources :reviews, only: [:index]
+  
   # Categories
   resources :categories, only: [] do
     member do
       get "/businesses", to: "categories#businesses"
+      get "/reviews", to: "categories#reviews"
     end
   end
   

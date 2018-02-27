@@ -1,6 +1,10 @@
 class ReviewsController < ApplicationController
   before_action :require_user, only: [:create]
   
+  def index
+    @reviews = Review.order("created_at DESC")
+  end
+  
   def create
     business = Business.find_by(slug: params[:id])
     
