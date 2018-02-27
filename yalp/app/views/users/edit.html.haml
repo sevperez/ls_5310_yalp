@@ -13,3 +13,4 @@
     %i.fa.fa-user-circle-o.mr-2(area-hidden="true")
     = "Edit Profile: #{@user.full_name}"
   = render "form", url: user_path
+  = link_to "Cancel", user_path(@user), class: "primary-link float-right"

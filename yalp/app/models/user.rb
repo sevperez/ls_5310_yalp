@@ -17,4 +17,8 @@ class User < ActiveRecord::Base
   def review_count
     reviews.count
   end
+  
+  def has_reviewed?(business)
+    reviews.all.pluck(:business_id).include?(business.id)
+  end
 end

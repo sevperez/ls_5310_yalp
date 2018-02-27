@@ -28,7 +28,7 @@
             - Category.order("name ASC").each do |category|
               = link_to reviews_category_path(category), class: "dropdown-item" do
                 %small= category.name.titleize
-    = form_tag search_businesses_path, class: "form-inline.mx-lg-3", method: "get" do
+    = form_tag search_businesses_path, class: "form-inline mx-lg-3", method: "get" do
       .input-group.w-100
         = text_field_tag :term, nil, { class: "form-control", placeholder: "Search" }
         .input-group-append
