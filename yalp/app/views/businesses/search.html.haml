@@ -1,0 +1,7 @@
+%section.col-10.mx-auto
+  %p.lead.mb-2.text-center= "Search Results: #{params[:term]}"
+  - if @results.count > 0
+    %ul.list-group.business-list
+      = render @results
+  - else
+    %p Sorry, no results...

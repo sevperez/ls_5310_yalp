@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     member do
       post "/review", to: "reviews#create"
     end
+    
+    collection do
+      get "/search", to: "businesses#search"
+    end
   end
   
   # Reviews
