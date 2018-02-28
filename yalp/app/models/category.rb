@@ -24,7 +24,7 @@ class Category < ActiveRecord::Base
   
   def self.select_options
     self.order("name ASC").map do |cat|
-      [cat.name, cat.id]
+      [cat.name, cat.id.to_s]
     end
   end
 end
