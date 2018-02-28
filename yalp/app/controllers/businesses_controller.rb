@@ -19,6 +19,7 @@ class BusinessesController < ApplicationController
   def create
     @business = Business.new(business_params)
     @business.owner = current_user
+    
     if @business.save
       flash[:success] = "Your business has been added to the registry!"
       redirect_to business_path(@business)
