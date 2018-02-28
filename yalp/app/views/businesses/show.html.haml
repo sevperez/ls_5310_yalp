@@ -23,7 +23,7 @@
       - if star_remainder >= 0.5
         %i.fa.fa-star-half-o.mr-2.text-star-gold
     .d-inline-block.my-2.align-top.px-mw-200
-      = link_to "Website", @business.website, class: "primary-link mb-1", target: :_blank
+      = link_to "Website", fix_url(@business.website), class: "primary-link mb-1", target: :_blank
       %p.mb-0= @business.address
       %p.mb-0= "#{@business.city}, #{@business.state} #{@business.zip_code}"
       %p.mb-0= @business.phone_number

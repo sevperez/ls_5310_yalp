@@ -23,7 +23,7 @@
           %small.text-secondary
             %a(class="popover-anchor text-secondary" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="What is this for?" data-content="The category type will determine where your business is displayed in our directory.")
               %i.fa.fa-question-circle-o
-          = f.select :category_id, options_for_select(Category.select_options), { skip_label: true }, { class: "form-control" }
+          = f.select :category_id, options_for_select([["Activities", "1"], ["Food and Drink", "2"], ["Lodging", "3"], ["Services", "5"], ["Shopping", "4"]], "1"), skip_label: true
       .form-row
         .form-group.col-12.mb-0
           = f.text_field :address, placeholder: "Address", label: "Address"
@@ -51,5 +51,5 @@
       .form-row
         .form-group.col-12.mb-0
           = f.text_area :description, rows: "5"
-      = f.submit "Register", class: "btn primary-btn"
+      = f.submit "Add", class: "btn primary-btn"
       %button(type="reset" class="btn secondary-btn px-3") Reset

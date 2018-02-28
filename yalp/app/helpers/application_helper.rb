@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def fix_url(url)
+    url.start_with?("http") ? url : "http://#{url}"
+  end
+  
   def format_datetime(datetime)
     if current_user
       datetime = datetime.in_time_zone(current_user.timezone)
