@@ -4,9 +4,10 @@ A simple Yelp clone built with Ruby on Rails.
 
 #### Deployed Version
 
-A version of this application has been deployed to Heroku at the following link: 
+A version of this application has been deployed to Heroku at the below link. Please note that the application is on a Heroku hobby dyno, and therefore may need time to spin up depending on recent usage.
 
-[Yalp](http://www.todo.com) // TODO
+[Yalp](https://yalp-sjp.herokuapp.com)
+
 
 #### Stack
 
