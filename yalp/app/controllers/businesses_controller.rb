@@ -24,7 +24,7 @@ class BusinessesController < ApplicationController
       flash[:success] = "Your business has been added to the registry!"
       redirect_to business_path(@business)
     else
-      flash[:danger] = "Hmmm, there seems to have been an error. Please check your input."
+      flash.now[:danger] = "Hmmm, there seems to have been an error. Please check your input."
       render :new
     end
   end

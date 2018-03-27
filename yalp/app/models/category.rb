@@ -21,10 +21,4 @@ class Category < ActiveRecord::Base
     
     count == 0 ? 1 : (count.to_f / Review::REVIEWS_PER_PAGE).ceil
   end
-  
-  def self.select_options
-    self.order("name ASC").map do |cat|
-      [cat.name, cat.id.to_s]
-    end
-  end
 end

@@ -13,16 +13,6 @@ class CategoriesController < ApplicationController
     @num_pages = @category.number_review_pages
     
     @reviews = Review.retrieve_by_newest(page_num, @category)
-    
-    # category_reviews = []
-    
-    # @category.businesses.each do |business|
-    #   business.reviews.each do |review|
-    #     category_reviews << review
-    #   end
-    # end
-    
-    # @reviews = Review.sort_by_newest(category_reviews)
   end
   
   private
