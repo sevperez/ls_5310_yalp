@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       flash[:success] = "User registration successful!"
       redirect_to root_path
     else
-      flash[:danger] = "Hmm, looks like there was an error."
+      flash.now[:danger] = "Hmm, looks like there was an error."
       render :new
     end
   end
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       flash[:success] = "Your profile has been updated!"
       redirect_to user_path(@user)
     else
-      flash[:danger] = "Hmm, looks like there was an error."
+      flash.now[:danger] = "Hmm, looks like there was an error."
       render :edit
     end
   end

@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Sign in successful!"
       redirect_to root_path
     else
-      flash[:danger] = "Unable to sign in with those credentials."
+      flash.now[:danger] = "Unable to sign in with those credentials."
       render "new"
     end
   end

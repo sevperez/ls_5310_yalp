@@ -3,12 +3,9 @@
 require "rails_helper"
 
 describe Category do
-  context "ActiveRecord" do
-    it { should validate_presence_of(:name) }
-    it { should have_many(:businesses) }
-  end
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to have_many(:businesses) }
   
-  # slugging
   it_behaves_like "sluggable" do
     let(:item_type_sym) { :category }
     let(:item_attr) { :name }

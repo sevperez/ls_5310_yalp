@@ -24,23 +24,29 @@ class BusinessesController < ApplicationController
       flash[:success] = "Your business has been added to the registry!"
       redirect_to business_path(@business)
     else
-      flash[:danger] = "Hmmm, there seems to have been an error. Please check your input."
+      flash.now[:danger] = "Hmmm, there seems to have been an error. Please check your input."
       render :new
     end
   end
   
   def search
-    term = params[:term].blank? ? nil : params[:term].downcase
+    search_results = Business.search(params[:term])
+    sorted_results = Business.sort_by_stars_then_name(search_results)
     
-    if term.nil?
-      search_results = []
-    elsif is_state?(term)
-      search_results = Business.where(state: term.upcase)
-    else
-      search_results = Business.all.select { |b| b.all_text.include?(term) }
-    end
+    page_num = if params[:page].blank? || params[:page].to_i == 0
+                 1
+               else
+                 params[:page].to_i
+               end
     
-    @results = Business.sort_by_stars_then_name(search_results)
+    @num_pages = if search_results.count == 0
+                   1
+                 else
+                   (search_results.count.to_f / Business::BUSINESSES_PER_PAGE).ceil
+                 end
+
+    offset = (page_num - 1) * Business::BUSINESSES_PER_PAGE
+    @results = sorted_results.slice(offset, Business::BUSINESSES_PER_PAGE)
   end
   
   private

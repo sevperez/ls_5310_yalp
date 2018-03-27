@@ -40,9 +40,7 @@ describe CategoriesController do
     let!(:rev_2) { Fabricate(:review, business: bus_2) }
     let!(:rev_3) { Fabricate(:review, business: bus_3) }
     
-    before(:each) do
-      get :reviews, params: { id: cat.slug }
-    end
+    before(:each) { get :reviews, params: { id: cat.slug } }
     
     it "sets @category" do
       expect(assigns(:category)).to eq(cat)

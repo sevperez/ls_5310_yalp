@@ -68,4 +68,32 @@ class Business < ActiveRecord::Base
     page_businesses = self.sort_by_stars_then_name(businesses)
     page_businesses[offset..offset + BUSINESSES_PER_PAGE - 1]
   end
+  
+  def self.search(term)
+    term = term.blank? ? nil : term.downcase
+    
+    if term.nil?
+      search_results = []
+    elsif self.is_state?(term)
+      abbr = if term.length == 2
+              term.upcase
+            else
+              states = ApplicationController.helpers.us_states
+              states.select { |state| state[0].downcase == term.downcase }[0][1]
+            end
+                   
+      search_results = Business.where(state: abbr)
+    else
+      search_results = Business.all.select { |b| b.all_text.include?(term) }
+    end
+  end
+  
+  def self.is_state?(term)
+    states = ApplicationController.helpers.us_states
+    
+    full_state_names = states.map { |state| state[0].downcase }
+    state_abbreviations = states.map { |state| state[1].downcase }
+
+    full_state_names.include?(term) || state_abbreviations.include?(term)
+  end
 end

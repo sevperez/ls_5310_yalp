@@ -32,7 +32,7 @@
       .input-group.w-100
         = text_field_tag :term, nil, { class: "form-control", placeholder: "Search" }
         .input-group-append
-          = button_tag(type: "submit", class: "btn btn-outline-secondary") do
+          = button_tag(type: "submit", class: "btn btn-outline-secondary", name: nil) do
             %i.fa.fa-search
     .navbar-signin
       - unless logged_in?
