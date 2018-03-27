@@ -1,9 +1,7 @@
 # SEEDS
 
 # Users
-popeye = User.create(full_name: "Popeye Perez", email: "popeye@pops.com", password: "password", timezone: "Pacific Time (US & Canada)", motto: "You either die a good boy, or you live long enough to see yourself become a bad dog.")
-
-olive = User.create(full_name: "Olive Oil", email: "olive@oil.com", password: "password", timezone: "Pacific Time (US & Canada)", motto: "If you can't beat 'em, join 'em.")
+popeye = User.create(full_name: "Test User", email: "test@user.com", password: "password", timezone: "Pacific Time (US & Canada)", motto: "Gotta love testing.")
 
 20.times do |_|
   Fabricate(:user, password: "password")
@@ -15,14 +13,14 @@ end
 end
 
 # Businesses
-100.times do |_|
+50.times do |_|
   b = Fabricate(:business, owner: User.all.sample)
   b.update_average_star_score
 end
 
 # Reviews
 User.all.each do |u|
-  next if u.email == "popeye@pops.com" || u.email == "olive@oil.com"
+  next if u.email == "test@user.com"
   
   Business.all.each do |b|
     if [true, false, false, false].sample

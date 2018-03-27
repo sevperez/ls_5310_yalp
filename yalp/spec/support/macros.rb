@@ -12,3 +12,15 @@ end
 def clear_test_user
   session[:user_id] = nil
 end
+
+def feature_sign_in_user(email, password)
+  visit root_path
+  click_link "Sign In"
+  
+  within("#sign_in_form") do
+    fill_in "Email", with: email
+    fill_in "Password", with: password
+  end
+  
+  click_button "Submit"
+end

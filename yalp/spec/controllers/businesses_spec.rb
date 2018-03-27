@@ -66,9 +66,7 @@ describe BusinessesController do
       end
       
       context "valid input" do
-        before(:each) do
-          post :create, params: { business: valid_inputs }
-        end
+        before(:each) { post :create, params: { business: valid_inputs } }
         
         it "sets @business to the provided params" do
           expect(assigns(:business).name).to eq(valid_inputs[:name])
@@ -93,9 +91,7 @@ describe BusinessesController do
       context "invalid input" do
         let!(:invalid_inputs) { Fabricate.attributes_for(:business, owner: nil, address: "", phone_number: "") }
         
-        before(:each) do
-          post :create, params: { business: invalid_inputs }
-        end
+        before(:each) { post :create, params: { business: invalid_inputs } }
         
         it "does not save a new business to the database" do
           expect(Business.count).to eq(0)
@@ -106,9 +102,7 @@ describe BusinessesController do
     end
     
     context "unauthenticated user" do
-      before(:each) do
-        post :create, params: { business: valid_inputs }
-      end
+      before(:each) { post :create, params: { business: valid_inputs } }
       
       it_behaves_like "danger_message"
       it_behaves_like "root_redirect"
@@ -118,34 +112,9 @@ describe BusinessesController do
   describe "GET search" do
     let!(:bus) { Fabricate(:business, name: "Fry's Electronics", description: "A pretty ok electronics store.", address: "340 Portage Ave", city: "Palo Alto", state: "CA", zip_code: "94306", phone_number: "650-496-6000", website: "www.frys.com") }
     
-    it "sets @results to empty array if no results" do
-      get :search, params: { term: "San Francisco" }
-      expect(assigns(:results).count).to eq(0)
-    end
-    
-    it "sets @results to include relevant businesses if matching city field" do
+    it "sets @results" do
       get :search, params: { term: "Palo Alto" }
-      expect(assigns(:results).first).to eq(bus)
-    end
-    
-    it "sets @results to include relevant businesses if matching description" do
-      get :search, params: { term: "electronics store" }
-      expect(assigns(:results).first).to eq(bus)
-    end
-    
-    it "sets @results to include relevant businesses if matching state field" do
-      get :search, params: { term: "CA" }
-      expect(assigns(:results).first).to eq(bus)
-    end
-    
-    it "sets @results to include relevant businesses if matching name field" do
-      get :search, params: { term: "Fry's" }
-      expect(assigns(:results).first).to eq(bus)
-    end
-    
-    it "sets @results to include relevant businesses if matching zip code" do
-      get :search, params: { term: "94306" }
-      expect(assigns(:results).first).to eq(bus)
+      expect(assigns(:results).count).to eq(1)
     end
   end
 end
