@@ -31,7 +31,22 @@ class BusinessesController < ApplicationController
   
   def search
     search_results = Business.search(params[:term])
-    @results = Business.sort_by_stars_then_name(search_results)
+    sorted_results = Business.sort_by_stars_then_name(search_results)
+    
+    page_num = if params[:page].blank? || params[:page].to_i == 0
+                 1
+               else
+                 params[:page].to_i
+               end
+    
+    @num_pages = if search_results.count == 0
+                   1
+                 else
+                   (search_results.count.to_f / Business::BUSINESSES_PER_PAGE).ceil
+                 end
+
+    offset = (page_num - 1) * Business::BUSINESSES_PER_PAGE
+    @results = sorted_results.slice(offset, Business::BUSINESSES_PER_PAGE)
   end
   
   private

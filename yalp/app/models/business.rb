@@ -75,7 +75,14 @@ class Business < ActiveRecord::Base
     if term.nil?
       search_results = []
     elsif self.is_state?(term)
-      search_results = Business.where(state: term.upcase)
+      abbr = if term.length == 2
+              term.upcase
+            else
+              states = ApplicationController.helpers.us_states
+              states.select { |state| state[0].downcase == term.downcase }[0][1]
+            end
+                   
+      search_results = Business.where(state: abbr)
     else
       search_results = Business.all.select { |b| b.all_text.include?(term) }
     end
