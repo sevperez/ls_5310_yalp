@@ -1,7 +1,7 @@
 # SEEDS
 
 # Users
-popeye = User.create(full_name: "Test User", email: "test@user.com", password: "password", timezone: "Pacific Time (US & Canada)", motto: "Gotta love testing.")
+test_user = User.create(full_name: "Test User", email: "test@user.com", password: "password", timezone: "Pacific Time (US & Canada)", motto: "Gotta love testing.")
 
 20.times do |_|
   Fabricate(:user, password: "password")
